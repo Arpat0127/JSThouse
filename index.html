@@ -13,7 +13,7 @@
     color: #e0e0e0;
   }
   .container {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 30px auto;
     padding: 20px;
     background: #111126;
@@ -25,11 +25,18 @@
     color: #00f0ff;
     font-weight: 600;
   }
-  table {
+  .info-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    table-layout: fixed;
+  }
+  .config-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  table {
+    table-layout: auto;
   }
   th, td {
     border: 1px solid #222236;
@@ -41,14 +48,59 @@
   th {
     background: #111133;
     color: #00f0ff;
+    white-space: nowrap;
   }
   tr:nth-child(even) {
     background: #12122a;
+  }
+  .config-row:hover {
+    background: #1a1a35 !important;
   }
   .img-cell img {
     max-width: 100px;
     display: block;
     margin: auto;
+  }
+  .checkbox-cell {
+    width: 50px;
+    text-align: center;
+  }
+  .config-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #00f0ff;
+  }
+  .price-cell {
+    width: 120px;
+    text-align: right;
+    font-weight: bold;
+    color: #00ffcc;
+  }
+  .select-row {
+    background: #1a1a35 !important;
+  }
+  .total-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #0f0f22;
+    border-radius: 10px;
+    border: 2px solid #00f0ff;
+  }
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 18px;
+  }
+  .total-price {
+    font-size: 28px;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 10px rgba(0,255,0,0.5);
+  }
+  .base-price-label {
+    color: #888;
   }
   button {
     display: block;
@@ -64,12 +116,62 @@
   }
   button:hover {
     background: linear-gradient(90deg, #0080ff, #00f0ff);
+    transform: scale(1.05);
+  }
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
   }
   .result-link {
     word-break: break-all;
     margin-top: 15px;
     color: #00ffcc;
     text-align: center;
+  }
+  .quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .quantity-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #00f0ff;
+    background: transparent;
+    color: #00f0ff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+  .quantity-btn:hover {
+    background: #00f0ff;
+    color: #000;
+  }
+  .quantity-input {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    background: #111133;
+    border: 1px solid #00f0ff;
+    color: #00f0ff;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  .item-total {
+    font-size: 14px;
+    color: #ffcc00;
+  }
+  @media print {
+    body { background: #fff; color: #000; }
+    .container { box-shadow: none; }
+    button, .button-group { display: none; }
   }
 </style>
 </head>
@@ -79,10 +181,10 @@
   <h1>JST Assemble the Spacecraft</h1>
   <h2>捷士通拼装太空舱</h2>
 
-  <table>
+  <table class="info-table">
     <tr>
       <th>Model型号</th><td>JST-S30</td>
-      <th>Size尺寸</th><td>8.5*3.5*3.5 m</td>
+      <th>Size尺寸</th><td>8.5×3.5×3.5 m</td>
     </tr>
     <tr>
       <th>Area面积</th><td>29.75 ㎡</td>
@@ -94,85 +196,215 @@
     </tr>
   </table>
 
-  <table>
+  <h3 style="color: #00f0ff; margin-top: 30px;">可选配置项目</h3>
+  <table class="config-table">
     <tr>
+      <th class="checkbox-cell">选择</th>
       <th>Project 项目</th>
       <th>JST Upgraded Configuration 捷士通升级配置</th>
       <th>Advantage 捷优势</th>
-      <th>Reference image 参考图</th>
+      <th>数量</th>
+      <th>单价(元)</th>
+      <th>小计(元)</th>
     </tr>
-    <tr>
-      <td>Thermal insulation system 保温体系</td>
+    <tr class="config-row" data-id="insulation" data-price="15000" data-quantity="1">
+      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox" checked></td>
+      <td>Thermal insulation system<br>保温体系</td>
       <td>Three-wall and two-void patented insulation system + 100mm thick polyurethane spray coating<br>新型三墙两空专利隔热保温体系 +100mm厚聚氨酯喷涂<br>（专利号:ZL.21 2020 2 0574422.0）</td>
-      <td>More insulation 更保温</td>
-      <td class="img-cell"><img src="https://via.placeholder.com/100" alt="参考图"></td>
-    </tr>
-    <tr>
-      <td>Intelligent Five Constant Systems 智能五恒系统</td>
-      <td>JST Whole-house intelligent five-constant system 捷士通全屋智能五恒系统</td>
-      <td>More comfortable 更舒适</td>
+      <td>More insulation<br>更保温</td>
       <td></td>
+      <td class="price-cell">15,000</td>
+      <td class="item-total price-cell">15,000</td>
     </tr>
-    <tr>
-      <td>Underfloor heating 地暖</td>
-      <td>Carbon rod underfloor heating 碳棒地暖</td>
-      <td>Warmer 更温暖</td>
+    <tr class="config-row" data-id="five-constant" data-price="25000" data-quantity="1">
+      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox" checked></td>
+      <td>Intelligent Five Constant Systems<br>智能五恒系统</td>
+      <td>JST Whole-house intelligent five-constant system<br>捷士通全屋智能五恒系统</td>
+      <td>More comfortable<br>更舒适</td>
       <td></td>
+      <td class="price-cell">25,000</td>
+      <td class="item-total price-cell">25,000</td>
     </tr>
-    <tr>
-      <td>Water heater 热水器</td>
-      <td>60L thermal storage water heater 60L储热式热水器</td>
-      <td>Much hot water 热水足</td>
+    <tr class="config-row" data-id="floor-heating" data-price="8000" data-quantity="1">
+      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox" checked></td>
+      <td>Underfloor heating<br>地暖</td>
+      <td>Carbon rod underfloor heating<br>碳棒地暖</td>
+      <td>Warmer<br>更温暖</td>
       <td></td>
+      <td class="price-cell">8,000</td>
+      <td class="item-total price-cell">8,000</td>
     </tr>
-    <tr>
-      <td>Electric curtain 电动窗帘</td>
-      <td>Electric curtains + metal track 电动窗帘+金属轨道</td>
-      <td>Intelligent experience 智能体验</td>
-      <td class="img-cell"><img src="https://via.placeholder.com/100" alt="参考图"></td>
-    </tr>
-    <tr>
-      <td>Toilet 马桶</td>
-      <td>Smart toiletst 智能马桶</td>
-      <td>Anti-splashing, anti-odor 防溅、防臭</td>
-      <td class="img-cell"><img src="https://via.placeholder.com/100" alt="参考图"></td>
-    </tr>
-    <tr>
-      <td>Smart projector 智能投影仪</td>
-      <td>Smart projector + electric screen 智能投影仪+电动幕布</td>
-      <td>More convenient 更便捷</td>
+    <tr class="config-row" data-id="water-heater" data-price="3500" data-quantity="1">
+      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox" checked></td>
+      <td>Water heater<br>热水器</td>
+      <td>60L thermal storage water heater<br>60L储热式热水器</td>
+      <td>Much hot water<br>热水足</td>
       <td></td>
+      <td class="price-cell">3,500</td>
+      <td class="item-total price-cell">3,500</td>
     </tr>
-    <tr>
-      <td>Move furniture 移动家具</td>
-      <td>Wardrobe, sofa, coffee table, open bar counter 衣柜、沙发、茶几、开放式吧台</td>
-      <td>More comfortable 更舒适</td>
-      <td class="img-cell"><img src="https://via.placeholder.com/100" alt="参考图"></td>
-    </tr>
-    <tr>
-      <td>Hotel bedding 酒店床品</td>
-      <td>Bed, mattress, bedside table 床、床垫、床头柜</td>
-      <td>More comfortable 更舒适</td>
+    <tr class="config-row" data-id="curtain" data-price="4200" data-quantity="1">
+      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox"></td>
+      <td>Electric curtain<br>电动窗帘</td>
+      <td>Electric curtains + metal track<br>电动窗帘+金属轨道</td>
+      <td>Intelligent experience<br>智能体验</td>
       <td></td>
+      <td class="price-cell">4,200</td>
+      <td class="item-total price-cell">0</td>
+    </tr>
+    <tr class="config-row" data-id="toilet" data-price="6800" data-quantity="1">
+      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox" checked></td>
+      <td>Toilet<br>马桶</td>
+      <td>Smart toilet<br>智能马桶</td>
+      <td>Anti-splashing, anti-odor<br>防溅、防臭</td>
+      <td></td>
+      <td class="price-cell">6,800</td>
+      <td class="item-total price-cell">6,800</td>
+    </tr>
+    <tr class="config-row" data-id="projector" data-price="5500" data-quantity="1">
+      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox"></td>
+      <td>Smart projector<br>智能投影仪</td>
+      <td>Smart projector + electric screen<br>智能投影仪+电动幕布</td>
+      <td>More convenient<br>更便捷</td>
+      <td></td>
+      <td class="price-cell">5,500</td>
+      <td class="item-total price-cell">0</td>
+    </tr>
+    <tr class="config-row" data-id="furniture" data-price="12000" data-quantity="1">
+      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox"></td>
+      <td>Move furniture<br>移动家具</td>
+      <td>Wardrobe, sofa, coffee table, open bar counter<br>衣柜、沙发、茶几、开放式吧台</td>
+      <td>More comfortable<br>更舒适</td>
+      <td></td>
+      <td class="price-cell">12,000</td>
+      <td class="item-total price-cell">0</td>
+    </tr>
+    <tr class="config-row" data-id="bedding" data-price="4500" data-quantity="1">
+      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox" checked></td>
+      <td>Hotel bedding<br>酒店床品</td>
+      <td>Bed, mattress, bedside table<br>床、床垫、床头柜</td>
+      <td>More comfortable<br>更舒适</td>
+      <td></td>
+      <td class="price-cell">4,500</td>
+      <td class="item-total price-cell">4,500</td>
     </tr>
   </table>
 
-  <table>
-    <tr>
-      <th>单价</th><td>人民币元</td>
-      <th>运费</th><td>待定</td>
-      <th>合计</th><td>待定</td>
-    </tr>
-  </table>
+  <div class="total-section">
+    <div class="total-row">
+      <span>太空舱基础价格:</span>
+      <span class="base-price-label">¥150,000</span>
+    </div>
+    <div class="total-row">
+      <span>已选配置总价:</span>
+      <span id="configTotal" style="color: #00f0ff;">¥62,800</span>
+    </div>
+    <div class="total-row">
+      <span>运费:</span>
+      <span id="shippingCost">¥8,000</span>
+    </div>
+    <div class="total-row" style="margin-top: 15px; border-top: 1px solid #00f0ff; padding-top: 15px;">
+      <span style="font-size: 22px; color: #00f0ff;">合计总价:</span>
+      <span class="total-price" id="grandTotal">¥220,800</span>
+    </div>
+  </div>
 
-  <button onclick="generateScreenshot()">生成截图下载</button>
-  <button onclick="generateLink()">生成分享链接</button>
+  <div class="button-group">
+    <button onclick="generateScreenshot()">📷 生成截图下载</button>
+    <button onclick="generateLink()">🔗 生成分享链接</button>
+    <button onclick="exportConfig()">📄 导出配置清单</button>
+    <button onclick="printConfig()">🖨️ 打印配置</button>
+  </div>
 
   <div class="result-link" id="resultLink"></div>
 
 </div>
 
 <script>
+const BASE_PRICE = 150000;
+const SHIPPING_COST = 8000;
+
+function initPage() {
+  const checkboxes = document.querySelectorAll('.config-checkbox');
+  const rows = document.querySelectorAll('.config-row');
+
+  rows.forEach((row, index) => {
+    const checkbox = row.querySelector('.config-checkbox');
+    const quantityCell = row.querySelector('td:nth-child(5)');
+    
+    quantityCell.innerHTML = `
+      <div class="quantity-control">
+        <button class="quantity-btn" onclick="changeQuantity(${index}, -1)">-</button>
+        <input type="number" class="quantity-input" value="1" min="1" max="10" 
+               onchange="updateQuantity(${index}, this.value)" id="qty-${index}">
+        <button class="quantity-btn" onclick="changeQuantity(${index}, 1)">+</button>
+      </div>
+    `;
+
+    checkbox.addEventListener('change', function() {
+      row.classList.toggle('select-row', this.checked);
+      updateTotals();
+    });
+
+    if (checkbox.checked) {
+      row.classList.add('select-row');
+    }
+  });
+
+  updateTotals();
+}
+
+function changeQuantity(index, delta) {
+  const input = document.getElementById(`qty-${index}`);
+  let newValue = parseInt(input.value) + delta;
+  newValue = Math.max(1, Math.min(10, newValue));
+  input.value = newValue;
+  updateQuantity(index, newValue);
+}
+
+function updateQuantity(index, value) {
+  const row = document.querySelectorAll('.config-row')[index];
+  const checkbox = row.querySelector('.config-checkbox');
+  const price = parseInt(row.dataset.price);
+  const itemTotal = row.querySelector('.item-total');
+  
+  row.dataset.quantity = value;
+  
+  if (checkbox.checked) {
+    itemTotal.textContent = formatPrice(price * value);
+  }
+  
+  updateTotals();
+}
+
+function updateTotals() {
+  const rows = document.querySelectorAll('.config-row');
+  let configTotal = 0;
+
+  rows.forEach(row => {
+    const checkbox = row.querySelector('.config-checkbox');
+    const price = parseInt(row.dataset.price);
+    const quantity = parseInt(row.dataset.quantity);
+    const itemTotal = row.querySelector('.item-total');
+
+    if (checkbox.checked) {
+      configTotal += price * quantity;
+      itemTotal.textContent = formatPrice(price * quantity);
+    } else {
+      itemTotal.textContent = '0';
+    }
+  });
+
+  const grandTotal = BASE_PRICE + configTotal + SHIPPING_COST;
+
+  document.getElementById('configTotal').textContent = formatPrice(configTotal);
+  document.getElementById('grandTotal').textContent = formatPrice(grandTotal);
+}
+
+function formatPrice(price) {
+  return '¥' + price.toLocaleString();
+}
+
 function generateScreenshot() {
   html2canvas(document.getElementById('configArea')).then(canvas => {
     const link = document.createElement('a');
@@ -183,10 +415,92 @@ function generateScreenshot() {
 }
 
 function generateLink() {
+  const config = getConfigData();
   const baseURL = location.origin + location.pathname;
-  const params = encodeURIComponent("JST-S30 配置清单");
-  const url = baseURL + "?config=" + params;
-  document.getElementById('resultLink').textContent = url;
+  const encodedConfig = encodeURIComponent(JSON.stringify(config));
+  const url = baseURL + "?config=" + encodedConfig;
+  document.getElementById('resultLink').innerHTML = `
+    <strong>分享链接已生成:</strong><br>
+    <a href="${url}" target="_blank" style="color: #00ffcc;">${url}</a>
+  `;
+}
+
+function getConfigData() {
+  const rows = document.querySelectorAll('.config-row');
+  const selectedItems = [];
+
+  rows.forEach(row => {
+    const checkbox = row.querySelector('.config-checkbox');
+    if (checkbox.checked) {
+      selectedItems.push({
+        id: row.dataset.id,
+        name: row.querySelector('td:nth-child(2)').textContent.trim(),
+        price: parseInt(row.dataset.price),
+        quantity: parseInt(row.dataset.quantity)
+      });
+    }
+  });
+
+  return {
+    model: 'JST-S30',
+    basePrice: BASE_PRICE,
+    shipping: SHIPPING_COST,
+    selectedItems: selectedItems,
+    total: document.getElementById('grandTotal').textContent,
+    timestamp: new Date().toISOString()
+  };
+}
+
+function exportConfig() {
+  const config = getConfigData();
+  let content = `
+JST 捷士通太空舱配置清单
+=====================================
+型号: ${config.model}
+生成时间: ${new Date(config.timestamp).toLocaleString('zh-CN')}
+=====================================
+
+基础价格: ¥${config.basePrice.toLocaleString()}
+运费: ¥${config.shipping.toLocaleString()}
+
+已选配置:
+=====================================
+`;
+
+  config.selectedItems.forEach(item => {
+    content += `✓ ${item.name}\n`;
+    content += `  单价: ¥${item.price.toLocaleString()} × ${item.quantity}套\n`;
+    content += `  小计: ¥${(item.price * item.quantity).toLocaleString()}\n\n`;
+  });
+
+  const configTotal = config.selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  content += `-------------------------------------\n`;
+  content += `配置总价: ¥${configTotal.toLocaleString()}\n`;
+  content += `合计总价: ${config.total}\n`;
+
+  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+  const link = document.createElement('a');
+  link.download = 'JST_太空舱配置清单.txt';
+  link.href = URL.createObjectURL(blob);
+  link.click();
+}
+
+function printConfig() {
+  window.print();
+}
+
+document.addEventListener('DOMContentLoaded', initPage);
+
+if (window.location.search.includes('config=')) {
+  const params = new URLSearchParams(window.location.search);
+  const configStr = params.get('config');
+  try {
+    const config = JSON.parse(decodeURIComponent(configStr));
+    console.log('加载的配置:', config);
+    alert('配置已加载！');
+  } catch (e) {
+    console.error('配置解析失败:', e);
+  }
 }
 </script>
 
