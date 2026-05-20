@@ -1,508 +1,334 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<title>JST Assemble the Spacecraft - 捷士通拼装太空舱</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<style>
-  body {
-    margin:0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0a0a12;
-    color: #e0e0e0;
-  }
-  .container {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 20px;
-    background: #111126;
-    border-radius: 15px;
-    box-shadow: 0 0 30px rgba(0,255,255,0.2);
-  }
-  h1, h2 {
-    text-align: center;
-    color: #00f0ff;
-    font-weight: 600;
-  }
-  .info-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  .config-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  table {
-    table-layout: auto;
-  }
-  th, td {
-    border: 1px solid #222236;
-    padding: 12px;
-    text-align: left;
-    vertical-align: top;
-    color: #e0e0e0;
-  }
-  th {
-    background: #111133;
-    color: #00f0ff;
-    white-space: nowrap;
-  }
-  tr:nth-child(even) {
-    background: #12122a;
-  }
-  .config-row:hover {
-    background: #1a1a35 !important;
-  }
-  .img-cell img {
-    max-width: 100px;
-    display: block;
-    margin: auto;
-  }
-  .checkbox-cell {
-    width: 50px;
-    text-align: center;
-  }
-  .config-checkbox {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    accent-color: #00f0ff;
-  }
-  .price-cell {
-    width: 120px;
-    text-align: right;
-    font-weight: bold;
-    color: #00ffcc;
-  }
-  .select-row {
-    background: #1a1a35 !important;
-  }
-  .total-section {
-    margin-top: 30px;
-    padding: 20px;
-    background: #0f0f22;
-    border-radius: 10px;
-    border: 2px solid #00f0ff;
-  }
-  .total-row {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-    font-size: 18px;
-  }
-  .total-price {
-    font-size: 28px;
-    font-weight: bold;
-    color: #00ff00;
-    text-shadow: 0 0 10px rgba(0,255,0,0.5);
-  }
-  .base-price-label {
-    color: #888;
-  }
-  button {
-    display: block;
-    margin: 20px auto;
-    padding: 12px 30px;
-    border: none;
-    border-radius: 10px;
-    background: linear-gradient(90deg, #00f0ff, #0080ff);
-    color: #fff;
-    font-size: 18px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  button:hover {
-    background: linear-gradient(90deg, #0080ff, #00f0ff);
-    transform: scale(1.05);
-  }
-  .button-group {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-  .result-link {
-    word-break: break-all;
-    margin-top: 15px;
-    color: #00ffcc;
-    text-align: center;
-  }
-  .quantity-control {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .quantity-btn {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #00f0ff;
-    background: transparent;
-    color: #00f0ff;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-  }
-  .quantity-btn:hover {
-    background: #00f0ff;
-    color: #000;
-  }
-  .quantity-input {
-    width: 40px;
-    height: 30px;
-    text-align: center;
-    background: #111133;
-    border: 1px solid #00f0ff;
-    color: #00f0ff;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  .item-total {
-    font-size: 14px;
-    color: #ffcc00;
-  }
-  @media print {
-    body { background: #fff; color: #000; }
-    .container { box-shadow: none; }
-    button, .button-group { display: none; }
-  }
-</style>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="西加艾提的企业AI转型与AI解决方案落地案例集，展示AI内容工厂、RAG知识库、智能体和组织AI赋能经验。"
+    />
+    <title>西加艾提 | 企业AI转型与AI解决方案落地</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" aria-label="主导航">
+      <a class="brand" href="#top" aria-label="返回首页">西加艾提</a>
+      <nav class="nav-links" aria-label="页面导航">
+        <a href="#impact">成果</a>
+        <a href="#method">方法</a>
+        <a href="#cases">案例</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </header>
 
-<div class="container" id="configArea">
-  <h1>JST Assemble the Spacecraft</h1>
-  <h2>捷士通拼装太空舱</h2>
+    <main id="top">
+      <section class="hero product-hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">AI Implementation Portfolio</p>
+          <h1 id="hero-title">帮传统企业，把AI从工具试用推进到业务结果。</h1>
+          <p class="hero-lede">
+            我是西加艾提，专注企业AI落地与解决方案。主导8个AI项目从0到1上线，覆盖获客、内容、客服知识库、数据分析和组织赋能。
+          </p>
+          <div class="hero-actions">
+            <a class="text-link" href="#cases">查看案例</a>
+            <a class="text-link" href="#architecture">方案架构</a>
+            <a class="text-link" href="#contact">联系我</a>
+          </div>
+        </div>
+        <figure class="hero-device hero-scene" aria-label="AI光粒子网络视觉">
+          <canvas class="hero-scene-canvas" aria-hidden="true"></canvas>
+          <figcaption class="scene-caption">LLM · RAG · Agents · AIGC</figcaption>
+        </figure>
+      </section>
 
-  <table class="info-table">
-    <tr>
-      <th>Model型号</th><td>JST-S30</td>
-      <th>Size尺寸</th><td>8.5×3.5×3.5 m</td>
-    </tr>
-    <tr>
-      <th>Area面积</th><td>29.75 ㎡</td>
-      <th>Occupancy人数</th><td>2人</td>
-    </tr>
-    <tr>
-      <th>Capacity功率</th><td>12 kW</td>
-      <th>Weight重量</th><td>10T</td>
-    </tr>
-  </table>
+      <section class="impact-band" id="impact" aria-label="关键成果">
+        <div class="impact-intro">
+          <p class="eyebrow">Impact</p>
+          <h2>不是演示版AI，而是能带来业务结果的AI。</h2>
+        </div>
+        <div class="metrics">
+          <article>
+            <strong>8</strong>
+            <span>企业AI项目落地</span>
+          </article>
+          <article>
+            <strong>200%+</strong>
+            <span>内容生产效率提升</span>
+          </article>
+          <article>
+            <strong>25%+</strong>
+            <span>海外获客成本下降</span>
+          </article>
+          <article>
+            <strong>50</strong>
+            <span>跨部门AI培训覆盖人数</span>
+          </article>
+        </div>
+      </section>
 
-  <h3 style="color: #00f0ff; margin-top: 30px;">可选配置项目</h3>
-  <table class="config-table">
-    <tr>
-      <th class="checkbox-cell">选择</th>
-      <th>Project 项目</th>
-      <th>JST Upgraded Configuration 捷士通升级配置</th>
-      <th>Advantage 捷优势</th>
-      <th>数量</th>
-      <th>单价(元)</th>
-      <th>小计(元)</th>
-    </tr>
-    <tr class="config-row" data-id="insulation" data-price="15000" data-quantity="1">
-      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox" checked></td>
-      <td>Thermal insulation system<br>保温体系</td>
-      <td>Three-wall and two-void patented insulation system + 100mm thick polyurethane spray coating<br>新型三墙两空专利隔热保温体系 +100mm厚聚氨酯喷涂<br>（专利号:ZL.21 2020 2 0574422.0）</td>
-      <td>More insulation<br>更保温</td>
-      <td></td>
-      <td class="price-cell">15,000</td>
-      <td class="item-total price-cell">15,000</td>
-    </tr>
-    <tr class="config-row" data-id="five-constant" data-price="25000" data-quantity="1">
-      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox" checked></td>
-      <td>Intelligent Five Constant Systems<br>智能五恒系统</td>
-      <td>JST Whole-house intelligent five-constant system<br>捷士通全屋智能五恒系统</td>
-      <td>More comfortable<br>更舒适</td>
-      <td></td>
-      <td class="price-cell">25,000</td>
-      <td class="item-total price-cell">25,000</td>
-    </tr>
-    <tr class="config-row" data-id="floor-heating" data-price="8000" data-quantity="1">
-      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox" checked></td>
-      <td>Underfloor heating<br>地暖</td>
-      <td>Carbon rod underfloor heating<br>碳棒地暖</td>
-      <td>Warmer<br>更温暖</td>
-      <td></td>
-      <td class="price-cell">8,000</td>
-      <td class="item-total price-cell">8,000</td>
-    </tr>
-    <tr class="config-row" data-id="water-heater" data-price="3500" data-quantity="1">
-      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox" checked></td>
-      <td>Water heater<br>热水器</td>
-      <td>60L thermal storage water heater<br>60L储热式热水器</td>
-      <td>Much hot water<br>热水足</td>
-      <td></td>
-      <td class="price-cell">3,500</td>
-      <td class="item-total price-cell">3,500</td>
-    </tr>
-    <tr class="config-row" data-id="curtain" data-price="4200" data-quantity="1">
-      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox"></td>
-      <td>Electric curtain<br>电动窗帘</td>
-      <td>Electric curtains + metal track<br>电动窗帘+金属轨道</td>
-      <td>Intelligent experience<br>智能体验</td>
-      <td></td>
-      <td class="price-cell">4,200</td>
-      <td class="item-total price-cell">0</td>
-    </tr>
-    <tr class="config-row" data-id="toilet" data-price="6800" data-quantity="1">
-      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox" checked></td>
-      <td>Toilet<br>马桶</td>
-      <td>Smart toilet<br>智能马桶</td>
-      <td>Anti-splashing, anti-odor<br>防溅、防臭</td>
-      <td></td>
-      <td class="price-cell">6,800</td>
-      <td class="item-total price-cell">6,800</td>
-    </tr>
-    <tr class="config-row" data-id="projector" data-price="5500" data-quantity="1">
-      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox"></td>
-      <td>Smart projector<br>智能投影仪</td>
-      <td>Smart projector + electric screen<br>智能投影仪+电动幕布</td>
-      <td>More convenient<br>更便捷</td>
-      <td></td>
-      <td class="price-cell">5,500</td>
-      <td class="item-total price-cell">0</td>
-    </tr>
-    <tr class="config-row" data-id="furniture" data-price="12000" data-quantity="1">
-      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox"></td>
-      <td>Move furniture<br>移动家具</td>
-      <td>Wardrobe, sofa, coffee table, open bar counter<br>衣柜、沙发、茶几、开放式吧台</td>
-      <td>More comfortable<br>更舒适</td>
-      <td></td>
-      <td class="price-cell">12,000</td>
-      <td class="item-total price-cell">0</td>
-    </tr>
-    <tr class="config-row" data-id="bedding" data-price="4500" data-quantity="1">
-      <td class="checkbox-cell"><input type="checkbox" class="config-checkbox" checked></td>
-      <td>Hotel bedding<br>酒店床品</td>
-      <td>Bed, mattress, bedside table<br>床、床垫、床头柜</td>
-      <td>More comfortable<br>更舒适</td>
-      <td></td>
-      <td class="price-cell">4,500</td>
-      <td class="item-total price-cell">4,500</td>
-    </tr>
-  </table>
+      <section class="statement-section">
+        <p>
+          很多企业的问题不是“不知道AI”，而是AI停留在工具试用、培训热闹和单点演示。我做的是另一件事：从业务流程出发，找到值得AI化的场景，搭建工具链，推动团队使用，再用数据判断是否真的提升。
+        </p>
+      </section>
 
-  <div class="total-section">
-    <div class="total-row">
-      <span>太空舱基础价格:</span>
-      <span class="base-price-label">¥150,000</span>
-    </div>
-    <div class="total-row">
-      <span>已选配置总价:</span>
-      <span id="configTotal" style="color: #00f0ff;">¥62,800</span>
-    </div>
-    <div class="total-row">
-      <span>运费:</span>
-      <span id="shippingCost">¥8,000</span>
-    </div>
-    <div class="total-row" style="margin-top: 15px; border-top: 1px solid #00f0ff; padding-top: 15px;">
-      <span style="font-size: 22px; color: #00f0ff;">合计总价:</span>
-      <span class="total-price" id="grandTotal">¥220,800</span>
-    </div>
-  </div>
+      <section class="fit-section">
+        <div class="section-title centered">
+          <p class="eyebrow">Role Fit</p>
+          <h2>适合放在能推动AI落地的位置。</h2>
+        </div>
+        <div class="fit-grid">
+          <article>
+            <span>适合方向</span>
+            <h3>AI解决方案经理</h3>
+            <p>能从业务流程拆场景、设计方案、推进试点，并把结果讲清楚。</p>
+          </article>
+          <article>
+            <span>适合方向</span>
+            <h3>企业AI落地负责人</h3>
+            <p>适合传统企业AI转型、内部AI工具体系建设和跨部门推广。</p>
+          </article>
+          <article>
+            <span>适合方向</span>
+            <h3>AIGC解决方案顾问</h3>
+            <p>适合内容工厂、设计提效、海外获客素材和多模态生产流程。</p>
+          </article>
+          <article class="not-fit">
+            <span>能力边界</span>
+            <h3>纯算法 / 纯后端架构</h3>
+            <p>我的强项不是底层模型研发，而是AI应用、业务场景和项目交付。</p>
+          </article>
+        </div>
+      </section>
 
-  <div class="button-group">
-    <button onclick="generateScreenshot()">📷 生成截图下载</button>
-    <button onclick="generateLink()">🔗 生成分享链接</button>
-    <button onclick="exportConfig()">📄 导出配置清单</button>
-    <button onclick="printConfig()">🖨️ 打印配置</button>
-  </div>
+      <section class="method-section" id="method">
+        <div class="section-title">
+          <p class="eyebrow">Method</p>
+          <h2>一套面向企业真实流程的落地方法。</h2>
+        </div>
+        <div class="method-grid">
+          <article>
+            <span>01</span>
+            <h3>识别场景</h3>
+            <p>梳理销售、客服、内容、设计和数据分析流程，优先选择高频、重复、可量化的业务环节。</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>设计方案</h3>
+            <p>组合LLM、RAG、Agent、AIGC和自动化工具，设计能被团队实际使用的系统和流程。</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>上线试点</h3>
+            <p>小范围跑通真实任务，快速修正输出质量、知识库结构、提示词和使用门槛。</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>规模推广</h3>
+            <p>沉淀SOP、提示词库、部门模板和培训机制，把个人能力转化为组织生产力。</p>
+          </article>
+        </div>
+      </section>
 
-  <div class="result-link" id="resultLink"></div>
+      <section class="architecture-section" id="architecture">
+        <div class="section-title centered">
+          <p class="eyebrow">Architecture</p>
+          <h2>一个企业AI项目，应该长成这样。</h2>
+        </div>
+        <div class="architecture-map" aria-label="企业AI落地架构图">
+          <div class="arch-column">
+            <span>业务入口</span>
+            <strong>销售获客</strong>
+            <strong>客服问答</strong>
+            <strong>内容生产</strong>
+            <strong>数据分析</strong>
+          </div>
+          <div class="arch-arrow" aria-hidden="true"></div>
+          <div class="arch-core">
+            <span>AI能力层</span>
+            <h3>LLM + RAG + Agent</h3>
+            <p>Dify / LangChain / 企业知识库 / 私有化部署 / 提示词库 / 工作流自动化</p>
+          </div>
+          <div class="arch-arrow" aria-hidden="true"></div>
+          <div class="arch-column">
+            <span>业务结果</span>
+            <strong>降低成本</strong>
+            <strong>提升人效</strong>
+            <strong>提高转化</strong>
+            <strong>沉淀SOP</strong>
+          </div>
+        </div>
+      </section>
 
-</div>
+      <section class="cases-section" id="cases">
+        <div class="section-title centered">
+          <p class="eyebrow">Cases</p>
+          <h2>一个能点击展开的企业AI案例库。</h2>
+          <p class="section-subtitle">
+            结合已落地项目与可扩展方案，展示从业务问题识别、AI方案设计到组织推广的完整落地能力。
+          </p>
+        </div>
 
-<script>
-const BASE_PRICE = 150000;
-const SHIPPING_COST = 8000;
+        <article class="case-showcase dark case-open" data-case="growth-factory" tabindex="0" role="button">
+          <div class="case-copy">
+            <p class="case-label">Project · Overseas Growth</p>
+            <h3>海外获客AI内容工厂</h3>
+            <p>
+              面向TikTok、Facebook和独立站投放，搭建“调研-脚本-素材-测试-复盘”的内容生产闭环。
+            </p>
+          </div>
+          <div class="case-stats">
+            <div><strong>15-20条</strong><span>日均内容产出</span></div>
+            <div><strong>50%+</strong><span>内容成本下降</span></div>
+            <div><strong>25%+</strong><span>获客成本下降</span></div>
+          </div>
+        </article>
 
-function initPage() {
-  const checkboxes = document.querySelectorAll('.config-checkbox');
-  const rows = document.querySelectorAll('.config-row');
+        <div class="case-library">
+          <article class="case-tile case-open" data-case="rag-agent" tabindex="0" role="button">
+            <p class="case-label">Project · Knowledge Agent</p>
+            <h3>企业知识库与RAG智能体</h3>
+            <p>
+              将产品资料、客服话术、业务FAQ和内部规范沉淀为知识库，辅助销售、客服和内部支持团队快速问答。
+            </p>
+            <strong>人效提升30%+</strong>
+          </article>
+          <article class="case-tile muted case-open" data-case="aigc-design" tabindex="0" role="button">
+            <p class="case-label">Project · AIGC Workflow</p>
+            <h3>AIGC设计工作流升级</h3>
+            <p>
+              引入Stable Diffusion、Midjourney、Runway、LoRA测试和提示词库，重构提案、概念设计和视觉交付流程。
+            </p>
+            <strong>交付周期缩短60%</strong>
+          </article>
+          <article class="case-tile case-open" data-case="sales-copilot" tabindex="0" role="button">
+            <p class="case-label">Solution · Sales Growth</p>
+            <h3>销售AI助手与线索跟进系统</h3>
+            <p>
+              面向销售团队，把客户资料、产品卖点、跟进记录和话术沉淀为AI助手，提高响应速度和线索转化。
+            </p>
+            <strong>转化提升方向</strong>
+          </article>
+          <article class="case-tile muted case-open" data-case="customer-service" tabindex="0" role="button">
+            <p class="case-label">Solution · Service Efficiency</p>
+            <h3>AI客服质检与知识库联动</h3>
+            <p>
+              让客服问答、服务质检、FAQ维护和问题归因形成闭环，减少重复答疑，沉淀客户高频问题。
+            </p>
+            <strong>降本提效方向</strong>
+          </article>
+          <article class="case-tile muted case-open" data-case="meeting-bi" tabindex="0" role="button">
+            <p class="case-label">Solution · Management Efficiency</p>
+            <h3>会议纪要与经营数据AI助手</h3>
+            <p>
+              将会议纪要、任务跟进、日报周报和经营指标接入AI分析，帮助管理层快速看到问题和进展。
+            </p>
+            <strong>管理效率方向</strong>
+          </article>
+          <article class="case-tile case-open" data-case="private-deploy" tabindex="0" role="button">
+            <p class="case-label">Solution · Private Deployment</p>
+            <h3>企业私有化AI工具与权限体系</h3>
+            <p>
+              面向数据安全要求高的企业，设计本地部署、知识库权限、部门空间和使用规范。
+            </p>
+            <strong>安全可控方向</strong>
+          </article>
+        </div>
+      </section>
 
-  rows.forEach((row, index) => {
-    const checkbox = row.querySelector('.config-checkbox');
-    const quantityCell = row.querySelector('td:nth-child(5)');
-    
-    quantityCell.innerHTML = `
-      <div class="quantity-control">
-        <button class="quantity-btn" onclick="changeQuantity(${index}, -1)">-</button>
-        <input type="number" class="quantity-input" value="1" min="1" max="10" 
-               onchange="updateQuantity(${index}, this.value)" id="qty-${index}">
-        <button class="quantity-btn" onclick="changeQuantity(${index}, 1)">+</button>
+      <div class="case-modal" id="case-modal" aria-hidden="true">
+        <div class="case-modal-backdrop" data-modal-close></div>
+        <article class="case-modal-panel" role="dialog" aria-modal="true" aria-labelledby="case-modal-title">
+          <button class="modal-close" type="button" data-modal-close aria-label="关闭案例详情">×</button>
+          <p class="case-label" id="case-modal-label"></p>
+          <h2 id="case-modal-title"></h2>
+          <p class="modal-summary" id="case-modal-summary"></p>
+          <div class="modal-flow" id="case-modal-flow"></div>
+          <div class="modal-grid">
+            <section>
+              <h3>业务问题</h3>
+              <p id="case-modal-problem"></p>
+            </section>
+            <section>
+              <h3>我的动作</h3>
+              <ul id="case-modal-actions"></ul>
+            </section>
+            <section>
+              <h3>工具链</h3>
+              <p id="case-modal-tools"></p>
+            </section>
+            <section>
+              <h3>结果与价值</h3>
+              <p id="case-modal-result"></p>
+            </section>
+          </div>
+          <div class="modal-note">
+            <strong>项目洞察</strong>
+            <p id="case-modal-talk"></p>
+          </div>
+        </article>
       </div>
-    `;
 
-    checkbox.addEventListener('change', function() {
-      row.classList.toggle('select-row', this.checked);
-      updateTotals();
-    });
+      <section class="capabilities-section">
+        <div class="section-title">
+          <p class="eyebrow">Capabilities</p>
+          <h2>复合背景，让方案既懂业务，也能落地。</h2>
+        </div>
+        <div class="capability-list">
+          <div>
+            <h3>AI解决方案</h3>
+            <p>企业AI场景识别、项目交付、业务流程AI化、跨部门培训推广。</p>
+          </div>
+          <div>
+            <h3>智能体与知识库</h3>
+            <p>LLM、RAG、Agent、Dify、LangChain、Docker和GPU本地部署。</p>
+          </div>
+          <div>
+            <h3>AIGC生产体系</h3>
+            <p>ChatGPT、DeepSeek、Claude、Midjourney、Stable Diffusion、Runway。</p>
+          </div>
+          <div>
+            <h3>设计与前端背景</h3>
+            <p>Web前端、视觉设计、品牌设计、海外获客素材策略和团队管理。</p>
+          </div>
+        </div>
+      </section>
 
-    if (checkbox.checked) {
-      row.classList.add('select-row');
-    }
-  });
+      <section class="narrative-section">
+        <div>
+          <p class="eyebrow">Positioning</p>
+          <h2>我更关注AI如何产生业务结果。</h2>
+        </div>
+        <blockquote>
+          我不是传统意义上的标准SaaS产品经理，我更偏企业AI落地和解决方案。我的优势是能从业务场景出发，判断哪些流程适合AI化，再用LLM、RAG、Agent和AIGC工具链设计可落地方案，并推动团队和业务部门真正用起来。
+        </blockquote>
+      </section>
 
-  updateTotals();
-}
+      <section class="contact-section" id="contact">
+        <p class="eyebrow">Contact</p>
+        <h2>期待AI落地、解决方案和企业转型相关机会。</h2>
+        <p>
+          目标方向：AI解决方案经理、企业AI落地负责人、AIGC解决方案顾问、AI项目经理。
+        </p>
+        <div class="contact-actions">
+          <a class="button" href="assets/resume-xiji-aite.pdf" target="_blank" rel="noopener">查看完整简历</a>
+          <a class="button secondary" href="assets/resume-xiji-aite.pdf" download>下载简历 PDF</a>
+        </div>
+        <div class="wechat-card">
+          <img src="assets/wechat-qr.png" alt="微信二维码" />
+          <div>
+            <strong>添加微信沟通</strong>
+            <span>AI落地 / 解决方案 / 企业转型相关机会</span>
+          </div>
+        </div>
+      </section>
+    </main>
 
-function changeQuantity(index, delta) {
-  const input = document.getElementById(`qty-${index}`);
-  let newValue = parseInt(input.value) + delta;
-  newValue = Math.max(1, Math.min(10, newValue));
-  input.value = newValue;
-  updateQuantity(index, newValue);
-}
+    <footer class="site-footer">
+      <span>西加艾提</span>
+      <span>Enterprise AI Implementation Portfolio</span>
+    </footer>
 
-function updateQuantity(index, value) {
-  const row = document.querySelectorAll('.config-row')[index];
-  const checkbox = row.querySelector('.config-checkbox');
-  const price = parseInt(row.dataset.price);
-  const itemTotal = row.querySelector('.item-total');
-  
-  row.dataset.quantity = value;
-  
-  if (checkbox.checked) {
-    itemTotal.textContent = formatPrice(price * value);
-  }
-  
-  updateTotals();
-}
-
-function updateTotals() {
-  const rows = document.querySelectorAll('.config-row');
-  let configTotal = 0;
-
-  rows.forEach(row => {
-    const checkbox = row.querySelector('.config-checkbox');
-    const price = parseInt(row.dataset.price);
-    const quantity = parseInt(row.dataset.quantity);
-    const itemTotal = row.querySelector('.item-total');
-
-    if (checkbox.checked) {
-      configTotal += price * quantity;
-      itemTotal.textContent = formatPrice(price * quantity);
-    } else {
-      itemTotal.textContent = '0';
-    }
-  });
-
-  const grandTotal = BASE_PRICE + configTotal + SHIPPING_COST;
-
-  document.getElementById('configTotal').textContent = formatPrice(configTotal);
-  document.getElementById('grandTotal').textContent = formatPrice(grandTotal);
-}
-
-function formatPrice(price) {
-  return '¥' + price.toLocaleString();
-}
-
-function generateScreenshot() {
-  html2canvas(document.getElementById('configArea')).then(canvas => {
-    const link = document.createElement('a');
-    link.download = 'JST_太空舱配置清单.png';
-    link.href = canvas.toDataURL();
-    link.click();
-  });
-}
-
-function generateLink() {
-  const config = getConfigData();
-  const baseURL = location.origin + location.pathname;
-  const encodedConfig = encodeURIComponent(JSON.stringify(config));
-  const url = baseURL + "?config=" + encodedConfig;
-  document.getElementById('resultLink').innerHTML = `
-    <strong>分享链接已生成:</strong><br>
-    <a href="${url}" target="_blank" style="color: #00ffcc;">${url}</a>
-  `;
-}
-
-function getConfigData() {
-  const rows = document.querySelectorAll('.config-row');
-  const selectedItems = [];
-
-  rows.forEach(row => {
-    const checkbox = row.querySelector('.config-checkbox');
-    if (checkbox.checked) {
-      selectedItems.push({
-        id: row.dataset.id,
-        name: row.querySelector('td:nth-child(2)').textContent.trim(),
-        price: parseInt(row.dataset.price),
-        quantity: parseInt(row.dataset.quantity)
-      });
-    }
-  });
-
-  return {
-    model: 'JST-S30',
-    basePrice: BASE_PRICE,
-    shipping: SHIPPING_COST,
-    selectedItems: selectedItems,
-    total: document.getElementById('grandTotal').textContent,
-    timestamp: new Date().toISOString()
-  };
-}
-
-function exportConfig() {
-  const config = getConfigData();
-  let content = `
-JST 捷士通太空舱配置清单
-=====================================
-型号: ${config.model}
-生成时间: ${new Date(config.timestamp).toLocaleString('zh-CN')}
-=====================================
-
-基础价格: ¥${config.basePrice.toLocaleString()}
-运费: ¥${config.shipping.toLocaleString()}
-
-已选配置:
-=====================================
-`;
-
-  config.selectedItems.forEach(item => {
-    content += `✓ ${item.name}\n`;
-    content += `  单价: ¥${item.price.toLocaleString()} × ${item.quantity}套\n`;
-    content += `  小计: ¥${(item.price * item.quantity).toLocaleString()}\n\n`;
-  });
-
-  const configTotal = config.selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  content += `-------------------------------------\n`;
-  content += `配置总价: ¥${configTotal.toLocaleString()}\n`;
-  content += `合计总价: ${config.total}\n`;
-
-  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-  const link = document.createElement('a');
-  link.download = 'JST_太空舱配置清单.txt';
-  link.href = URL.createObjectURL(blob);
-  link.click();
-}
-
-function printConfig() {
-  window.print();
-}
-
-document.addEventListener('DOMContentLoaded', initPage);
-
-if (window.location.search.includes('config=')) {
-  const params = new URLSearchParams(window.location.search);
-  const configStr = params.get('config');
-  try {
-    const config = JSON.parse(decodeURIComponent(configStr));
-    console.log('加载的配置:', config);
-    alert('配置已加载！');
-  } catch (e) {
-    console.error('配置解析失败:', e);
-  }
-}
-</script>
-
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
