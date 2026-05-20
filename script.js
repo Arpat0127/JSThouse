@@ -3,6 +3,11 @@ const caseData = {
     label: "Project · Overseas Growth",
     title: "海外获客AI内容工厂",
     summary: "把海外投放素材生产从零散制作，升级成可持续测试和复盘的内容生产系统。",
+    story: [
+      "原来素材产出慢、测试样本少，投放反馈也很难快速反哺内容生产。",
+      "我把调研、脚本、素材、投放和复盘串成闭环，搭成可持续迭代的内容工厂。",
+      "结果是日均内容产出提升到15-20条，效率提升200%+，获客成本下降25%+。"
+    ],
     flow: ["市场调研", "卖点拆解", "脚本生成", "素材生产", "投放测试", "数据复盘"],
     problem: "传统素材制作周期长、测试样本少，投放反馈无法快速反哺内容生产，导致获客成本难以下降。",
     actions: [
@@ -19,6 +24,11 @@ const caseData = {
     label: "Project · Knowledge Agent",
     title: "企业知识库与RAG智能体",
     summary: "把分散的产品资料、客服话术和业务FAQ接入知识库，让销售、客服和新人能快速获取标准答案。",
+    story: [
+      "原来资料散落在文档和聊天记录里，重复问答很多，新员工上手也慢。",
+      "我把产品资料、FAQ和客服话术结构化后接入RAG知识库，做成可检索的内部助手。",
+      "结果是减少重复沟通和人工查询，核心业务环节人效提升30%+。"
+    ],
     flow: ["资料盘点", "知识清洗", "向量入库", "问答测试", "权限规范", "反馈迭代"],
     problem: "企业资料分散在文档、表格和聊天记录里，重复问答多，新员工上手慢，销售客服响应质量不稳定。",
     actions: [
@@ -35,6 +45,11 @@ const caseData = {
     label: "Project · AIGC Workflow",
     title: "AIGC设计工作流升级",
     summary: "把AIGC从个人工具尝试，变成团队能稳定复用的视觉提案和交付流程。",
+    story: [
+      "原来提案和概念设计周期长、重复成本高，团队经常要在节点前赶工。",
+      "我把AIGC接入设计流程，补上提示词库、风格测试和AI辅助修图这条链路。",
+      "结果是交付周期缩短60%，单项目效率提升2-3倍。"
+    ],
     flow: ["风格定义", "提示词库", "LoRA测试", "概念生成", "人工精修", "SOP沉淀"],
     problem: "传统视觉提案周期长、重复设计成本高，节点活动和客户提案需要更快的概念产出能力。",
     actions: [
@@ -51,6 +66,11 @@ const caseData = {
     label: "Solution · Sales Growth",
     title: "销售AI助手与线索跟进系统",
     summary: "老板最关心的是线索转化。这个方案把客户信息、产品卖点、跟进记录和销售话术接入AI助手。",
+    story: [
+      "当销售跟进依赖个人经验、客户资料分散、回复慢时，线索很容易在中途掉失。",
+      "我会把线索、卖点和话术沉淀成AI助手，让销售能更快响应并保持话术一致。",
+      "结果是提升响应速度、统一跟进质量，并帮助判断线索优先级。"
+    ],
     flow: ["线索录入", "客户画像", "话术推荐", "跟进提醒", "异议处理", "转化复盘"],
     problem: "销售跟进依赖个人经验，客户资料散落，回复慢，话术不统一，管理层很难判断线索质量和跟进状态。",
     actions: [
@@ -67,6 +87,11 @@ const caseData = {
     label: "Solution · Service Efficiency",
     title: "AI客服质检与知识库联动",
     summary: "把客服问答、质检、FAQ维护和客户问题归因连起来，适合客服量大、重复问题多的企业。",
+    story: [
+      "当客服重复答疑多、知识维护又跟不上时，服务质量很难稳定。",
+      "我会把质检、FAQ和问题归因串起来，让服务过程持续反哺知识库。",
+      "结果是减少重复人工成本，并让高频问题变成可持续优化的资产。"
+    ],
     flow: ["对话采集", "自动质检", "问题归因", "知识更新", "标准回复", "服务复盘"],
     problem: "客服重复答疑多，服务质量难检查，客户问题无法沉淀，知识库长期没人维护。",
     actions: [
@@ -83,6 +108,11 @@ const caseData = {
     label: "Solution · Management Efficiency",
     title: "会议纪要与经营数据AI助手",
     summary: "把会议、日报、周报和经营指标接入AI分析，帮助管理层快速看到问题、进展和责任人。",
+    story: [
+      "当会议、日报和经营数据彼此割裂时，管理层很难快速掌握真实进展。",
+      "我会把信息整合成AI助手，让会议结论、任务和指标能被持续追踪。",
+      "结果是提升决策效率，并让执行闭环更清晰。"
+    ],
     flow: ["会议记录", "任务抽取", "周报汇总", "指标分析", "风险提醒", "管理复盘"],
     problem: "管理信息分散，会议结论没人追踪，日报周报只是在汇报动作，经营数据和实际任务脱节。",
     actions: [
@@ -99,6 +129,11 @@ const caseData = {
     label: "Solution · Private Deployment",
     title: "企业私有化AI工具与权限体系",
     summary: "面向有数据安全顾虑的企业，设计本地化部署、知识库权限和部门级使用规范。",
+    story: [
+      "当企业想用AI又担心数据外泄时，工具虽好，却不敢真正铺开。",
+      "我会先设计权限、隔离和本地部署方案，再把使用边界讲清楚。",
+      "结果是让AI从个人工具变成组织内可控、可审计、可推广的能力。"
+    ],
     flow: ["安全评估", "本地部署", "权限分层", "知识隔离", "使用规范", "审计复盘"],
     problem: "企业想用AI但担心数据外泄，员工各用各的工具，资料上传不可控，缺少统一权限和规范。",
     actions: [
@@ -117,6 +152,7 @@ const modal = document.querySelector("#case-modal");
 const modalTitle = document.querySelector("#case-modal-title");
 const modalLabel = document.querySelector("#case-modal-label");
 const modalSummary = document.querySelector("#case-modal-summary");
+const modalStory = document.querySelector("#case-modal-story");
 const modalFlow = document.querySelector("#case-modal-flow");
 const modalProblem = document.querySelector("#case-modal-problem");
 const modalActions = document.querySelector("#case-modal-actions");
@@ -134,6 +170,9 @@ const openCaseModal = (caseKey, trigger) => {
   modalLabel.textContent = data.label;
   modalTitle.textContent = data.title;
   modalSummary.textContent = data.summary;
+  modalStory.innerHTML = data.story
+    .map((item, index) => `<span><strong>${index === 0 ? "痛点" : index === 1 ? "动作" : "结果"}：</strong>${item}</span>`)
+    .join("");
   modalProblem.textContent = data.problem;
   modalTools.textContent = data.tools;
   modalResult.textContent = data.result;
